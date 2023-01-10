@@ -1,0 +1,5 @@
+---
+hosts: win
+connection: local
+roles:
+  - roles
