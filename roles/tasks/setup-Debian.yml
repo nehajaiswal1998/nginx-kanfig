@@ -1,10 +1,24 @@
 ---
+# Apt update for Debian
 - name: Update apt cache.
   apt: update_cache=yes cache_valid_time=86400
   changed_when: false
 
+# Ensuring nginx installed or not on Debian
 - name: Ensure nginx is installed.
   apt:
     name: "{{ nginx_package_name }}" 
     state: present
     default_release: "{{ nginx_default_release }}"
+
+# Checking nginx process is running for Debian
+- name: Shell command to check if nginx process is running
+  shell: ps aux | grep {{ nginx_package_name }}
+  register: nginx_status
+
+# print message nginx installed or not for Debian
+- name: Check if nginx is installed
+  debug:
+    msg: nginx is Installed on Debian System
+  when: nginx_status.stdout != ""
+

@@ -3,23 +3,19 @@
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
 
+# Defining nginx user
 - name: Define nginx_user.
   set_fact:
     nginx_user: "{{ __nginx_user }}"
   when: nginx_user is not defined
 
-# Setup/install tasks.
+# Setup/install tasks fir RedHat.
 - include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat' 
 
-
-
+# Setup/install tasks fir Debian.
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
-
-
-
-
 
 # Nginx setup.
 - name: Copy nginx configuration in place.

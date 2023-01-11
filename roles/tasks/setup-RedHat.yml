@@ -1,4 +1,5 @@
 ---
+#Create the yum repository for RedHat and enabling nginx repository for RedHat
 - name: Enable nginx repo.
   template:
     src: nginx.repo.j2
@@ -8,7 +9,20 @@
     mode: 0644
   when: nginx_yum_repo_enabled | bool
 
+# Ensuring nginx installed or not on RedHat
 - name: Ensure nginx is installed.
   package:
     name: "{{ nginx_package_name }}"
     state: present
+
+# Checking nginx process is running on RedHat
+- name: Shell command to check if nginx process is running
+  shell: ps aux | grep {{ nginx_package_name }}
+  register: nginx_status
+
+# print message nginx installed or not on RedHat
+- name: Check if nginx is installed
+  debug:
+    msg: nginx is Installed on RedHat System
+  when: nginx_status.stdout != ""
+
