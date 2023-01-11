@@ -1,7 +1,7 @@
 ---
 # hosts mentioned as per os systems also roles call here
-hosts: win
-connection: local
-become: yes
-roles:
-  - roles
+- hosts: win
+  connection: local
+  become: yes
+  roles:
+    - roles
