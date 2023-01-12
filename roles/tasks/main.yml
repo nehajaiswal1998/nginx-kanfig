@@ -22,8 +22,6 @@
   template:
     src: "{{ nginx_conf_template }}" #nginx.conf.j2
     dest: "{{ nginx_conf_file_path }}" #/etc/nginx/nginx.conf
-    owner: root
-    group: "{{ root_group }}"
     mode: 0644
   notify:
     - reload nginx
