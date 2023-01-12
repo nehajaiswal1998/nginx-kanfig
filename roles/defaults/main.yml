@@ -23,8 +23,6 @@ nginx_worker_connections: "1024"
 
 nginx_multi_accept: "off"
 
-nginx_extra_conf_options: ""
-
 # If you have many server names, or have very long server names, you might get an Nginx error on startup requiring this value to be increased.
 nginx_server_names_hash_bucket_size: "64"
 
